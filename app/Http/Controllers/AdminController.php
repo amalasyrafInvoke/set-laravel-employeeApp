@@ -22,7 +22,7 @@ class AdminController extends Controller
       if (Auth::attempt($credentials)) {
         if (Auth::user()->role === 1) {
           $request->session()->regenerate();
-          $jwt_token = JWTAuth::attempt($credentials);
+          $jwt_token = Auth::attempt($credentials);
           session(['jwt_token' => $jwt_token]);
           return redirect()->route('admin.dashboard');
         } else {
@@ -58,7 +58,7 @@ class AdminController extends Controller
     $userCount = DB::table('users')->count();
     $jobCount = DB::table('jobs')->count();
     $deptCount = DB::table('departments')->count();
-    
+
     return view('admin.dashboard', compact('userCount', 'jobCount', 'deptCount', 'jwt_token'));
     // if (Auth::check()) {
     //   $userCount = DB::table('users')->count();

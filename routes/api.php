@@ -26,13 +26,18 @@ Route::group([
   'prefix' => 'auth'
 ], function () {
   Route::post('/login', [ApiController::class, 'login']);
-  Route::post('/logout', [ApiController::class, 'logout']);
-  Route::post('/refresh', [ApiController::class, 'refresh']);
-  Route::get('/user-profile', [ApiController::class, 'userProfile']);
+
+  Route::group([
+    'middleware' => 'auth'
+  ], function () {
+    Route::post('/logout', [ApiController::class, 'logout']);
+    Route::post('/refresh', [ApiController::class, 'refresh']);
+    Route::get('/user-profile', [ApiController::class, 'userProfile']);
+  });
 });
 
 Route::group([
-  'middleware' => 'auth.jwt'
+  'middleware' => 'auth'
 ], function () {
   Route::get('/dashboard', [ApiController::class, 'dashboard']);
 });
