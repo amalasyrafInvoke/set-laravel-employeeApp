@@ -27,7 +27,8 @@
         <td>{{ $user->email }}</td>
         <td>{{ $user->created_at }}</td>
         <td>
-          <a href="{{ route('admin.userEdit', ['id' => $user->id]) }}">Edit</a>
+          <a class="mx-1" href="{{ route('admin.userEdit', ['id' => $user->id]) }}">Edit</a>
+          <a class="mx-1 text-danger" href="{{ route('admin.userDelete', ['id' => $user->id]) }}">Delete</a>
         </td>
       </tr>
       @endforeach
