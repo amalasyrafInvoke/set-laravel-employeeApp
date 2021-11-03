@@ -1,4 +1,4 @@
-@extends('layout.default')
+@extends('layout.loginLayout')
 @section('content')
 
 <section class="vh-100">
