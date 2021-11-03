@@ -22,22 +22,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::post('/login', [ApiController::class, 'login']);
 // Route::post('/logout', [ApiController::class, 'logout']);
 
-Route::group([
-  'prefix' => 'auth'
-], function () {
+Route::group(['prefix' => 'auth'], function () {
   Route::post('/login', [ApiController::class, 'login']);
 
-  Route::group([
-    'middleware' => 'auth'
-  ], function () {
+  Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('/logout', [ApiController::class, 'logout']);
     Route::post('/refresh', [ApiController::class, 'refresh']);
     Route::get('/user-profile', [ApiController::class, 'userProfile']);
   });
 });
 
-Route::group([
-  'middleware' => 'auth'
-], function () {
+Route::group(['middleware' => 'auth.jwt'], function () {
   Route::get('/dashboard', [ApiController::class, 'dashboard']);
 });

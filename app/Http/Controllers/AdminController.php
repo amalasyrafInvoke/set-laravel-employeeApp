@@ -22,11 +22,9 @@ class AdminController extends Controller
       if (Auth::attempt($credentials)) {
         if (Auth::user()->role === 1) {
           $request->session()->regenerate();
-          $jwt_token = Auth::attempt($credentials);
+          $jwt_token = JWTAuth::attempt($credentials);
           session(['jwt_token' => $jwt_token]);
           return redirect()->route('admin.dashboard');
-        } else {
-          return redirect('/');
         }
       }
 
@@ -37,12 +35,14 @@ class AdminController extends Controller
       );
     }
 
-    if (Auth::check()) {
-      return redirect()->route('admin.dashboard');
-    } else {
-      return view('admin.login');
-    }
-    
+    return view('admin.login');
+
+    // if (Auth::check()) {
+    //   return redirect()->route('admin.dashboard');
+    // } else {
+    //   return view('admin.login');
+    // }
+
   }
 
   public function logout()
@@ -53,7 +53,8 @@ class AdminController extends Controller
     return redirect()->route('admin.login');
   }
 
-  public function dashboard() {
+  public function dashboard()
+  {
     $jwt_token = session('jwt_token');
     $userCount = DB::table('users')->count();
     $jobCount = DB::table('jobs')->count();
@@ -64,7 +65,7 @@ class AdminController extends Controller
     //   $userCount = DB::table('users')->count();
     //   $jobCount = DB::table('jobs')->count();
     //   $deptCount = DB::table('departments')->count();
-    //   return view('admin.dashboard', ['userCount' => $userCount,'jobCount' => $jobCount, 'deptCount' => $deptCount]);
+    // return view('admin.dashboard', compact('userCount', 'jobCount', 'deptCount', 'jwt_token'));
     // } else {
     //   return redirect()->route('admin.login');
     // }

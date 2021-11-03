@@ -18,17 +18,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 Route::prefix('admin')->group(function () {
-  Route::any('login',[AdminController::class, 'index'])->name('admin.login');
-  Route::any('logout',[AdminController::class, 'logout'])->name('admin.logout');
-  Route::any('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+  Route::any('login', [AdminController::class, 'index'])->name('admin.login');
 
-  Route::any('userList', [AdminUserController::class, 'index'])->name('admin.user');
-  Route::any('userList/edit/{id}', [AdminUserController::class, 'edit'])->name('admin.userEdit');
-  Route::any('jobList', [AdminJobController::class, 'index'])->name('admin.job');
-  Route::any('jobList/edit/{id}', [AdminJobController::class, 'edit'])->name('admin.jobEdit');
-  Route::any('departmentList', [AdminDepartmentController::class, 'index'])->name('admin.department');
-  Route::any('departmentList/edit/{id}', [AdminDepartmentController::class, 'edit'])->name('admin.departmentEdit');
+  Route::group(['middleware' => 'auth'], function () {
+    Route::any('logout', [AdminController::class, 'logout'])->name('admin.logout');
+    Route::any('dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    Route::any('userList', [AdminUserController::class, 'index'])->name('admin.user');
+    Route::any('userList/edit/{id}', [AdminUserController::class, 'edit'])->name('admin.userEdit');
+    Route::any('jobList', [AdminJobController::class, 'index'])->name('admin.job');
+    Route::any('jobList/edit/{id}', [AdminJobController::class, 'edit'])->name('admin.jobEdit');
+    Route::any('departmentList', [AdminDepartmentController::class, 'index'])->name('admin.department');
+    Route::any('departmentList/edit/{id}', [AdminDepartmentController::class, 'edit'])->name('admin.departmentEdit');
+  });
 });
