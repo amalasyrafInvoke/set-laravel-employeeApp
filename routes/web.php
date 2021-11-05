@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminDepartmentController;
 use App\Http\Controllers\AdminJobController;
 use App\Http\Controllers\AdminUserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,4 +38,25 @@ Route::prefix('admin')->group(function () {
     Route::any('departmentList/edit/{id}', [AdminDepartmentController::class, 'edit'])->name('admin.departmentEdit');
     Route::any('departmentList/delete/{id}', [AdminDepartmentController::class, 'delete'])->name('admin.departmentDelete');
   });
+});
+
+Route::get('queue-email', function () {
+
+  $email_list['email'] = 'capri.mal11@gmail.com';
+  $user = User::whereId(2)->first();
+  $email_list['user'] = $user;
+
+  dispatch(new \App\Jobs\QueueJob($email_list));
+
+  dd('Send Email Successfully');
+});
+
+Route::post('create-user', function () {
+  $user = new User();
+  $user->name = 'Amaluddin';
+  $user->email = 'capri.mal11@gmail.com';
+  $user->password = bcrypt('password');
+  $user->save();
+
+  return response()->json('user created');
 });

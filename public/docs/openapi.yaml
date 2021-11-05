@@ -104,62 +104,6 @@ paths:
             tags:
                 - Endpoints
             security: []
-    /api/auth/refresh:
-        post:
-            summary: 'Refresh a token.'
-            description: ''
-            parameters:
-                -
-                    in: header
-                    name: Content-Type
-                    description: ''
-                    example: application/json
-                    schema:
-                        type: string
-                -
-                    in: header
-                    name: Accept
-                    description: ''
-                    example: application/json
-                    schema:
-                        type: string
-            responses: {  }
-            tags:
-                - Endpoints
-            security: []
-    /api/auth/user-profile:
-        get:
-            summary: 'Get the authenticated User.'
-            description: ''
-            parameters:
-                -
-                    in: header
-                    name: Content-Type
-                    description: ''
-                    example: application/json
-                    schema:
-                        type: string
-                -
-                    in: header
-                    name: Accept
-                    description: ''
-                    example: application/json
-                    schema:
-                        type: string
-            responses:
-                401:
-                    description: ''
-                    content:
-                        application/json:
-                            schema:
-                                type: object
-                                example:
-                                    error: 'Token not parsed'
-                                properties:
-                                    error: { type: string, example: 'Token not parsed' }
-            tags:
-                - Endpoints
-            security: []
     /api/dashboard:
         get:
             summary: Dashboard
@@ -202,7 +146,7 @@ paths:
     /api/users:
         get:
             summary: 'User API'
-            description: "The API endpoint for users by pagination\nRoute: /dashboard"
+            description: "The API endpoint for users by pagination\nRoute: /users"
             parameters:
                 -
                     in: header

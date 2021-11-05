@@ -3,12 +3,12 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Job;
+use App\Models\EmployeeJob;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class JobSeeder extends Seeder
+class EmployeeJobSeeder extends Seeder
 {
   /**
    * Run the database seeds.
@@ -20,9 +20,9 @@ class JobSeeder extends Seeder
     //
     $faker = Faker::create();
 
-    foreach (range(1, 50) as $index) {
+    foreach (range(1, 10) as $index) {
       //this one insert date when run the save() function;
-      $job = new Job();
+      $job = new EmployeeJob();
       $job->title = $faker->jobTitle;
       $job->description = $faker->text;
       $job->min_salary = $faker->randomFloat(2, 0, 10000);

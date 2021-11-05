@@ -22,11 +22,11 @@ class CreateEmployeesTable extends Migration
             $table->string('phone_number');
             $table->unsignedBigInteger('department_id');
             $table->float('salary');
-            $table->unsignedBigInteger('job_id');
+            $table->unsignedBigInteger('employee_job_id');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('department_id')->references('id')->on('departments');
-            $table->foreign('job_id')->references('id')->on('jobs');
+            $table->foreign('employee_job_id')->references('id')->on('employee_jobs');
         });
     }
 

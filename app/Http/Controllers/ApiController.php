@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
+use App\Models\User;
+use JWTAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
 use App\Http\Traits\JsonTrait;
-use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use App\Models\Employee;
+use Illuminate\Support\Facades\Gate;
 
 class ApiController extends Controller
 {
@@ -47,7 +50,7 @@ class ApiController extends Controller
       );
     }
 
-    if (!$token = Auth::attempt($validator->validated())) {
+    if (!$token = JWTAuth::attempt($validator->validated())) {
       return response()->json(['error' => 'Unauthorized'], 401);
     }
 
@@ -98,7 +101,7 @@ class ApiController extends Controller
     return response()->json([
       'access_token' => $token,
       'token_type' => 'bearer',
-      'expires_in' => Auth::factory()->getTTL() * 60,
+      'expires_in' => auth('api')->factory()->getTTL() * 60,
       'user' => auth()->user()
     ]);
   }
@@ -122,19 +125,24 @@ class ApiController extends Controller
     $deptCount = DB::table('departments')->count();
     $message = 'Successfully retrieve the information';
     $code = 0;
+    // When employee has been set-up
+    // $employee =  Employee::whereId(1)
+    //   ->with(['user', 'jobHistory'])
+    //   ->first();
+    // $data = compact('userCount', 'jobCount', 'deptCount', 'employee');
     $data = compact('userCount', 'jobCount', 'deptCount');
 
     // return response()->json(['userCount' => $userCount,'jobCount' => $jobCount, 'deptCount' => $deptCount, 'message' => 'Successful fetch']);
     // return response()->json(compact('data', 'message', 'code'));
 
-    return $this->jsonSuccessResponse(compact('data', 'message', 'code'), '', 200);
+    return $this->jsonResponse(compact('data', 'message', 'code'), '', 200);
   }
 
   /**
    * User API
    * 
    * The API endpoint for users by pagination
-   * Route: /dashboard
+   * Route: /users
    * 
    * @authenticated
    * @header Authorization Bearer {{token}}
@@ -152,7 +160,18 @@ class ApiController extends Controller
     //   compact('users')
     // );
 
-    $users = User::where('id', 2)->first();
-    return $this->jsonSuccessResponse(new UserResource($users), 'Successfully retrieve the users');
+    $user = User::where('id', auth()->user()->id)->first();
+    $response = Gate::inspect('update', $user);
+    // $employee = Employee::where('id', 2)->with();
+
+    if ($response->allowed()) {
+      // The action is authorized...
+      $users = User::paginate(10);
+      return $this->jsonResponse(
+        UserResource::collection($users)
+      );
+    } else {
+      echo $response->message();
+    }
   }
 }

@@ -191,121 +191,6 @@ fetch(url, {
 </form>
 
 
-## Refresh a token.
-
-
-
-
-> Example request:
-
-```bash
-curl -X POST \
-    "http://127.0.0.1:8000/api/auth/refresh" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://127.0.0.1:8000/api/auth/refresh"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "POST",
-    headers,
-}).then(response => response.json());
-```
-
-
-<div id="execution-results-POSTapi-auth-refresh" hidden>
-    <blockquote>Received response<span id="execution-response-status-POSTapi-auth-refresh"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-POSTapi-auth-refresh"></code></pre>
-</div>
-<div id="execution-error-POSTapi-auth-refresh" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-POSTapi-auth-refresh"></code></pre>
-</div>
-<form id="form-POSTapi-auth-refresh" data-method="POST" data-path="api/auth/refresh" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('POSTapi-auth-refresh', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-POSTapi-auth-refresh" onclick="tryItOut('POSTapi-auth-refresh');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-POSTapi-auth-refresh" onclick="cancelTryOut('POSTapi-auth-refresh');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-POSTapi-auth-refresh" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-black">POST</small>
- <b><code>api/auth/refresh</code></b>
-</p>
-</form>
-
-
-## Get the authenticated User.
-
-
-
-
-> Example request:
-
-```bash
-curl -X GET \
-    -G "http://127.0.0.1:8000/api/auth/user-profile" \
-    -H "Content-Type: application/json" \
-    -H "Accept: application/json"
-```
-
-```javascript
-const url = new URL(
-    "http://127.0.0.1:8000/api/auth/user-profile"
-);
-
-let headers = {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-};
-
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response => response.json());
-```
-
-
-> Example response (401):
-
-```json
-{
-    "error": "Token not parsed"
-}
-```
-<div id="execution-results-GETapi-auth-user-profile" hidden>
-    <blockquote>Received response<span id="execution-response-status-GETapi-auth-user-profile"></span>:</blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-auth-user-profile"></code></pre>
-</div>
-<div id="execution-error-GETapi-auth-user-profile" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-auth-user-profile"></code></pre>
-</div>
-<form id="form-GETapi-auth-user-profile" data-method="GET" data-path="api/auth/user-profile" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-auth-user-profile', this);">
-<h3>
-    Request&nbsp;&nbsp;&nbsp;
-        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-auth-user-profile" onclick="tryItOut('GETapi-auth-user-profile');">Try it out ⚡</button>
-    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-auth-user-profile" onclick="cancelTryOut('GETapi-auth-user-profile');" hidden>Cancel</button>&nbsp;&nbsp;
-    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-auth-user-profile" hidden>Send Request 💥</button>
-    </h3>
-<p>
-<small class="badge badge-green">GET</small>
- <b><code>api/auth/user-profile</code></b>
-</p>
-</form>
-
-
 ## Dashboard
 
 <small class="badge badge-darkred">requires authentication</small>
@@ -385,7 +270,7 @@ scenario = "invalid token"
 <small class="badge badge-darkred">requires authentication</small>
 
 The API endpoint for users by pagination
-Route: /dashboard
+Route: /users
 
 > Example request:
 

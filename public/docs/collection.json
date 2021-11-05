@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Docs",
-        "_postman_id": "483dea32-5094-4a67-970f-883f88b4faee",
+        "_postman_id": "80c024d5-c21e-49f3-b1cb-d9a4e79de0d4",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -142,96 +142,6 @@
                     "response": []
                 },
                 {
-                    "name": "Refresh a token.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/auth\/refresh",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/auth\/refresh"
-                        },
-                        "method": "POST",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": []
-                },
-                {
-                    "name": "Get the authenticated User.",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/auth\/user-profile",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/auth\/user-profile"
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": [
-                        {
-                            "name": "Get the authenticated User. Response #1",
-                            "originalRequest": {
-                                "url": {
-                                    "protocol": "http",
-                                    "host": "{{baseUrl}}",
-                                    "path": "api\/auth\/user-profile",
-                                    "query": [],
-                                    "raw": "http:\/\/{{baseUrl}}\/api\/auth\/user-profile"
-                                },
-                                "method": "GET",
-                                "header": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "application\/json"
-                                    },
-                                    {
-                                        "key": "Accept",
-                                        "value": "application\/json"
-                                    }
-                                ],
-                                "body": null,
-                                "description": "",
-                                "auth": {
-                                    "type": "noauth"
-                                }
-                            },
-                            "header": null,
-                            "cookie": [],
-                            "body": "{\n    \"error\": \"Token not parsed\"\n}"
-                        }
-                    ]
-                },
-                {
                     "name": "Dashboard",
                     "request": {
                         "url": {
@@ -355,7 +265,7 @@
                             "mode": "raw",
                             "raw": "{\n    \"page\": 1\n}"
                         },
-                        "description": "The API endpoint for users by pagination\nRoute: \/dashboard"
+                        "description": "The API endpoint for users by pagination\nRoute: \/users"
                     },
                     "response": [
                         {
@@ -387,7 +297,7 @@
                                     "mode": "raw",
                                     "raw": "{\n    \"page\": 1\n}"
                                 },
-                                "description": "The API endpoint for users by pagination\nRoute: \/dashboard"
+                                "description": "The API endpoint for users by pagination\nRoute: \/users"
                             },
                             "header": null,
                             "cookie": [],
@@ -422,7 +332,7 @@
                                     "mode": "raw",
                                     "raw": "{\n    \"page\": 1\n}"
                                 },
-                                "description": "The API endpoint for users by pagination\nRoute: \/dashboard"
+                                "description": "The API endpoint for users by pagination\nRoute: \/users"
                             },
                             "header": null,
                             "cookie": [],
