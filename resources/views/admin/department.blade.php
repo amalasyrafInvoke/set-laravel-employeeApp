@@ -26,7 +26,8 @@
         <td>{{ $dept->name }}</td>
         <td>{{ $dept->created_at }}</td>
         <td>
-          <a href="{{ route('admin.departmentEdit', ['id' => $dept->id]) }}">Edit</a>
+          <a class="mx-1" href="{{ route('admin.departmentEdit', ['id' => $dept->id]) }}">Edit</a>
+          <a class="mx-1 text-danger" href="{{ route('admin.departmentDelete', ['id' => $dept->id]) }}">Delete</a>
         </td>
       </tr>
       @endforeach

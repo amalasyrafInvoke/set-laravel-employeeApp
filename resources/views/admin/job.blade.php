@@ -31,7 +31,9 @@
         <td>{{ $job->max_salary }}</td>
         <td>{{ $job->created_at }}</td>
         <td>
-          <a href="{{ route('admin.jobEdit', ['id' => $job->id]) }}">Edit</a>
+          <a class="mx-1" href="{{ route('admin.jobEdit', ['id' => $job->id]) }}">Edit</a>
+          <a class="mx-1 text-danger" href="{{ route('admin.jobDelete', ['id' => $job->id]) }}">Delete</a>
+
         </td>
       </tr>
       @endforeach

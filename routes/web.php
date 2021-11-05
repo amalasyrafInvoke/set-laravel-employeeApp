@@ -32,7 +32,9 @@ Route::prefix('admin')->group(function () {
     Route::any('userList/delete/{id}', [AdminUserController::class, 'delete'])->name('admin.userDelete');
     Route::any('jobList', [AdminJobController::class, 'index'])->name('admin.job');
     Route::any('jobList/edit/{id}', [AdminJobController::class, 'edit'])->name('admin.jobEdit');
+    Route::any('jobList/delete/{id}', [AdminJobController::class, 'delete'])->name('admin.jobDelete');
     Route::any('departmentList', [AdminDepartmentController::class, 'index'])->name('admin.department');
     Route::any('departmentList/edit/{id}', [AdminDepartmentController::class, 'edit'])->name('admin.departmentEdit');
+    Route::any('departmentList/delete/{id}', [AdminDepartmentController::class, 'delete'])->name('admin.departmentDelete');
   });
 });
