@@ -29,9 +29,11 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('/logout', [ApiController::class, 'logout']);
     Route::post('/refresh', [ApiController::class, 'refresh']);
     Route::get('/user-profile', [ApiController::class, 'userProfile']);
+    // Route::get('/dashboard', [ApiController::class, 'dashboard']);
   });
 });
 
 Route::group(['middleware' => 'auth.jwt'], function () {
   Route::get('/dashboard', [ApiController::class, 'dashboard']);
+  Route::get('/users', [ApiController::class, 'users']);
 });

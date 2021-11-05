@@ -5,12 +5,12 @@
             "key": "baseUrl",
             "type": "string",
             "name": "string",
-            "value": "localhost"
+            "value": "127.0.0.1"
         }
     ],
     "info": {
         "name": "Docs",
-        "_postman_id": "92b7b764-9a8a-40dd-8618-26897c7b909b",
+        "_postman_id": "483dea32-5094-4a67-970f-883f88b4faee",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -257,7 +257,7 @@
                             }
                         ],
                         "body": null,
-                        "description": "The API endpoint for dashboard\nRoute: \/admin\/dashboard"
+                        "description": "The API endpoint for dashboard\nRoute: \/dashboard"
                     },
                     "response": [
                         {
@@ -286,7 +286,7 @@
                                     }
                                 ],
                                 "body": null,
-                                "description": "The API endpoint for dashboard\nRoute: \/admin\/dashboard"
+                                "description": "The API endpoint for dashboard\nRoute: \/dashboard"
                             },
                             "header": null,
                             "cookie": [],
@@ -318,7 +318,111 @@
                                     }
                                 ],
                                 "body": null,
-                                "description": "The API endpoint for dashboard\nRoute: \/admin\/dashboard"
+                                "description": "The API endpoint for dashboard\nRoute: \/dashboard"
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "{\n    \"error\": \"Invalid token\"\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "User API",
+                    "request": {
+                        "url": {
+                            "protocol": "http",
+                            "host": "{{baseUrl}}",
+                            "path": "api\/users",
+                            "query": [],
+                            "raw": "http:\/\/{{baseUrl}}\/api\/users"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 1\n}"
+                        },
+                        "description": "The API endpoint for users by pagination\nRoute: \/dashboard"
+                    },
+                    "response": [
+                        {
+                            "name": "User API Response #1",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/users",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/users"
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"page\": 1\n}"
+                                },
+                                "description": "The API endpoint for users by pagination\nRoute: \/dashboard"
+                            },
+                            "header": null,
+                            "cookie": [],
+                            "body": "null"
+                        },
+                        {
+                            "name": "User API Response #2",
+                            "originalRequest": {
+                                "url": {
+                                    "protocol": "http",
+                                    "host": "{{baseUrl}}",
+                                    "path": "api\/users",
+                                    "query": [],
+                                    "raw": "http:\/\/{{baseUrl}}\/api\/users"
+                                },
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Accept",
+                                        "value": "application\/json"
+                                    },
+                                    {
+                                        "key": "Authorization",
+                                        "value": "Bearer {{token}}"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n    \"page\": 1\n}"
+                                },
+                                "description": "The API endpoint for users by pagination\nRoute: \/dashboard"
                             },
                             "header": null,
                             "cookie": [],

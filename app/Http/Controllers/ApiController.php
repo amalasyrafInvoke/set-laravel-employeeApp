@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use App\Http\Traits\JsonTrait;
+use App\Models\User;
 
 class ApiController extends Controller
 {
+  use JsonTrait;
   //
   /**
    * Create a new AuthController instance.
@@ -35,7 +39,12 @@ class ApiController extends Controller
     ]);
 
     if ($validator->fails()) {
-      return response()->json($validator->errors(), 422);
+      // return response()->json($validator->errors(), 422);
+      return $this->jsonResponse(
+        $validator->errors(),
+        'Invalid Input Parameter',
+        422
+      );
     }
 
     if (!$token = Auth::attempt($validator->validated())) {
@@ -98,7 +107,7 @@ class ApiController extends Controller
    * Dashboard
    * 
    * The API endpoint for dashboard
-   * Route: /admin/dashboard
+   * Route: /dashboard
    * 
    * @authenticated
    * @header Authorization Bearer {{token}}
@@ -116,6 +125,34 @@ class ApiController extends Controller
     $data = compact('userCount', 'jobCount', 'deptCount');
 
     // return response()->json(['userCount' => $userCount,'jobCount' => $jobCount, 'deptCount' => $deptCount, 'message' => 'Successful fetch']);
-    return response()->json(compact('data', 'message', 'code'));
+    // return response()->json(compact('data', 'message', 'code'));
+
+    return $this->jsonSuccessResponse(compact('data', 'message', 'code'), '', 200);
+  }
+
+  /**
+   * User API
+   * 
+   * The API endpoint for users by pagination
+   * Route: /dashboard
+   * 
+   * @authenticated
+   * @header Authorization Bearer {{token}}
+   * @response 401 scenario = "invalid token"
+   * 
+   * @bodyParam page int Page number for pagination. Example: 1
+   * 
+   * @return \Illuminate\Http\JsonResponse
+   */
+  public function users()
+  {
+    // $users = User::get();
+    // $users = User::paginate(10);
+    // return response()->json(
+    //   compact('users')
+    // );
+
+    $users = User::where('id', 2)->first();
+    return $this->jsonSuccessResponse(new UserResource($users), 'Successfully retrieve the users');
   }
 }

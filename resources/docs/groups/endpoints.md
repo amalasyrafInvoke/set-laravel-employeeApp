@@ -10,14 +10,14 @@
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/user" \
+    -G "http://127.0.0.1:8000/api/user" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/user"
+    "http://127.0.0.1:8000/api/user"
 );
 
 let headers = {
@@ -71,7 +71,7 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "http://localhost/api/auth/login" \
+    "http://127.0.0.1:8000/api/auth/login" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -d '{"email":"superadmin@invoke.com","password":"password"}'
@@ -80,7 +80,7 @@ curl -X POST \
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/auth/login"
+    "http://127.0.0.1:8000/api/auth/login"
 );
 
 let headers = {
@@ -146,14 +146,14 @@ The password of the user.
 
 ```bash
 curl -X POST \
-    "http://localhost/api/auth/logout" \
+    "http://127.0.0.1:8000/api/auth/logout" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/auth/logout"
+    "http://127.0.0.1:8000/api/auth/logout"
 );
 
 let headers = {
@@ -200,14 +200,14 @@ fetch(url, {
 
 ```bash
 curl -X POST \
-    "http://localhost/api/auth/refresh" \
+    "http://127.0.0.1:8000/api/auth/refresh" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/auth/refresh"
+    "http://127.0.0.1:8000/api/auth/refresh"
 );
 
 let headers = {
@@ -254,14 +254,14 @@ fetch(url, {
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/auth/user-profile" \
+    -G "http://127.0.0.1:8000/api/auth/user-profile" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json"
 ```
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/auth/user-profile"
+    "http://127.0.0.1:8000/api/auth/user-profile"
 );
 
 let headers = {
@@ -311,13 +311,13 @@ fetch(url, {
 <small class="badge badge-darkred">requires authentication</small>
 
 The API endpoint for dashboard
-Route: /admin/dashboard
+Route: /dashboard
 
 > Example request:
 
 ```bash
 curl -X GET \
-    -G "http://localhost/api/dashboard" \
+    -G "http://127.0.0.1:8000/api/dashboard" \
     -H "Content-Type: application/json" \
     -H "Accept: application/json" \
     -H "Authorization: Bearer {{token}}"
@@ -325,7 +325,7 @@ curl -X GET \
 
 ```javascript
 const url = new URL(
-    "http://localhost/api/dashboard"
+    "http://127.0.0.1:8000/api/dashboard"
 );
 
 let headers = {
@@ -377,6 +377,94 @@ scenario = "invalid token"
 <p>
 <label id="auth-GETapi-dashboard" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-dashboard" data-component="header"></label>
 </p>
+</form>
+
+
+## User API
+
+<small class="badge badge-darkred">requires authentication</small>
+
+The API endpoint for users by pagination
+Route: /dashboard
+
+> Example request:
+
+```bash
+curl -X GET \
+    -G "http://127.0.0.1:8000/api/users" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {{token}}" \
+    -d '{"page":1}'
+
+```
+
+```javascript
+const url = new URL(
+    "http://127.0.0.1:8000/api/users"
+);
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer {{token}}",
+};
+
+let body = {
+    "page": 1
+}
+
+fetch(url, {
+    method: "GET",
+    headers,
+    body: JSON.stringify(body),
+}).then(response => response.json());
+```
+
+
+> Example response (401):
+
+```json
+
+scenario = "invalid token"
+```
+> Example response (401):
+
+```json
+{
+    "error": "Invalid token"
+}
+```
+<div id="execution-results-GETapi-users" hidden>
+    <blockquote>Received response<span id="execution-response-status-GETapi-users"></span>:</blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-users"></code></pre>
+</div>
+<div id="execution-error-GETapi-users" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-users"></code></pre>
+</div>
+<form id="form-GETapi-users" data-method="GET" data-path="api/users" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {{token}}"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-users', this);">
+<h3>
+    Request&nbsp;&nbsp;&nbsp;
+        <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-users" onclick="tryItOut('GETapi-users');">Try it out ⚡</button>
+    <button type="button" style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-canceltryout-GETapi-users" onclick="cancelTryOut('GETapi-users');" hidden>Cancel</button>&nbsp;&nbsp;
+    <button type="submit" style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-executetryout-GETapi-users" hidden>Send Request 💥</button>
+    </h3>
+<p>
+<small class="badge badge-green">GET</small>
+ <b><code>api/users</code></b>
+</p>
+<p>
+<label id="auth-GETapi-users" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-users" data-component="header"></label>
+</p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>page</code></b>&nbsp;&nbsp;<small>integer</small>     <i>optional</i> &nbsp;
+<input type="number" name="page" data-endpoint="GETapi-users" data-component="body"  hidden>
+<br>
+Page number for pagination.
+</p>
+
 </form>
 
 
