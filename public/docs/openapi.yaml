@@ -42,7 +42,7 @@ paths:
             security: []
     /api/auth/login:
         post:
-            summary: 'Get a JWT via given credentials.'
+            summary: 'Login API'
             description: ''
             parameters:
                 -
@@ -62,6 +62,24 @@ paths:
             responses: {  }
             tags:
                 - Endpoints
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                email:
+                                    type: string
+                                    description: 'The email of the user.'
+                                    example: superadmin@invoke.com
+                                password:
+                                    type: string
+                                    description: 'The password of the user.'
+                                    example: password
+                            required:
+                                - email
+                                - password
             security: []
     /api/auth/logout:
         post:
@@ -129,21 +147,23 @@ paths:
                     schema:
                         type: string
             responses:
-                200:
+                401:
                     description: ''
                     content:
                         application/json:
                             schema:
                                 type: object
-                                example: {  }
-                                properties: {  }
+                                example:
+                                    error: 'Token not parsed'
+                                properties:
+                                    error: { type: string, example: 'Token not parsed' }
             tags:
                 - Endpoints
             security: []
     /api/dashboard:
         get:
-            summary: 'Get the info in dashboard'
-            description: ''
+            summary: Dashboard
+            description: "The API endpoint for dashboard\nRoute: /admin/dashboard"
             parameters:
                 -
                     in: header
@@ -159,6 +179,13 @@ paths:
                     example: application/json
                     schema:
                         type: string
+                -
+                    in: header
+                    name: Authorization
+                    description: ''
+                    example: 'Bearer {{token}}'
+                    schema:
+                        type: string
             responses:
                 401:
                     description: ''
@@ -167,9 +194,8 @@ paths:
                             schema:
                                 type: object
                                 example:
-                                    error: 'Token not parsed'
+                                    error: 'Invalid token'
                                 properties:
-                                    error: { type: string, example: 'Token not parsed' }
+                                    error: { type: string, example: 'Invalid token' }
             tags:
                 - Endpoints
-            security: []

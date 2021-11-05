@@ -44,7 +44,7 @@
                             <li><a href='http://github.com/knuckleswtf/scribe'>Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: November 3 2021</li>
+            <li>Last updated: November 5 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
@@ -111,14 +111,16 @@ fetch(url, {
  <b><code>api/user</code></b>
 </p>
 </form>
-<h2>Get a JWT via given credentials.</h2>
+<h2>Login API</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X POST \
     "http://localhost/api/auth/login" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -d '{"email":"superadmin@invoke.com","password":"password"}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/auth/login"
 );
@@ -128,9 +130,15 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "email": "superadmin@invoke.com",
+    "password": "password"
+}
+
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre>
 <div id="execution-results-POSTapi-auth-login" hidden>
     <blockquote>Received response<span id="execution-response-status-POSTapi-auth-login"></span>:</blockquote>
@@ -151,6 +159,20 @@ fetch(url, {
 <small class="badge badge-black">POST</small>
  <b><code>api/auth/login</code></b>
 </p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="email" data-endpoint="POSTapi-auth-login" data-component="body" required  hidden>
+<br>
+The email of the user.
+</p>
+<p>
+<b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="password" name="password" data-endpoint="POSTapi-auth-login" data-component="body" required  hidden>
+<br>
+The password of the user.
+</p>
+
 </form>
 <h2>Log the user out (Invalidate the token).</h2>
 <blockquote>
@@ -256,9 +278,11 @@ fetch(url, {
     headers,
 }).then(response =&gt; response.json());</code></pre>
 <blockquote>
-<p>Example response (200):</p>
+<p>Example response (401):</p>
 </blockquote>
-<pre><code class="language-json">{}</code></pre>
+<pre><code class="language-json">{
+    "error": "Token not parsed"
+}</code></pre>
 <div id="execution-results-GETapi-auth-user-profile" hidden>
     <blockquote>Received response<span id="execution-response-status-GETapi-auth-user-profile"></span>:</blockquote>
     <pre class="json"><code id="execution-response-content-GETapi-auth-user-profile"></code></pre>
@@ -279,14 +303,18 @@ fetch(url, {
  <b><code>api/auth/user-profile</code></b>
 </p>
 </form>
-<h2>Get the info in dashboard</h2>
+<h2>Dashboard</h2>
+<p><small class="badge badge-darkred">requires authentication</small></p>
+<p>The API endpoint for dashboard
+Route: /admin/dashboard</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
 <pre><code class="language-bash">curl -X GET \
     -G "http://localhost/api/dashboard" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"</code></pre>
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {{token}}"</code></pre>
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost/api/dashboard"
 );
@@ -294,6 +322,7 @@ fetch(url, {
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {{token}}",
 };
 
 fetch(url, {
@@ -303,8 +332,13 @@ fetch(url, {
 <blockquote>
 <p>Example response (401):</p>
 </blockquote>
+<pre><code class="language-json">
+scenario = "invalid token"</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
 <pre><code class="language-json">{
-    "error": "Token not parsed"
+    "error": "Invalid token"
 }</code></pre>
 <div id="execution-results-GETapi-dashboard" hidden>
     <blockquote>Received response<span id="execution-response-status-GETapi-dashboard"></span>:</blockquote>
@@ -314,7 +348,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-GETapi-dashboard"></code></pre>
 </div>
-<form id="form-GETapi-dashboard" data-method="GET" data-path="api/dashboard" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-dashboard', this);">
+<form id="form-GETapi-dashboard" data-method="GET" data-path="api/dashboard" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {{token}}"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-dashboard', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-dashboard" onclick="tryItOut('GETapi-dashboard');">Try it out ⚡</button>
@@ -324,6 +358,9 @@ fetch(url, {
 <p>
 <small class="badge badge-green">GET</small>
  <b><code>api/dashboard</code></b>
+</p>
+<p>
+<label id="auth-GETapi-dashboard" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-dashboard" data-component="header"></label>
 </p>
 </form>
     </div>

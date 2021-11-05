@@ -62,7 +62,7 @@ fetch(url, {
 </form>
 
 
-## Get a JWT via given credentials.
+## Login API
 
 
 
@@ -73,7 +73,9 @@ fetch(url, {
 curl -X POST \
     "http://localhost/api/auth/login" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -d '{"email":"superadmin@invoke.com","password":"password"}'
+
 ```
 
 ```javascript
@@ -86,10 +88,15 @@ let headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "email": "superadmin@invoke.com",
+    "password": "password"
+}
 
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response => response.json());
 ```
 
@@ -113,6 +120,20 @@ fetch(url, {
 <small class="badge badge-black">POST</small>
  <b><code>api/auth/login</code></b>
 </p>
+<h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+<p>
+<b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="text" name="email" data-endpoint="POSTapi-auth-login" data-component="body" required  hidden>
+<br>
+The email of the user.
+</p>
+<p>
+<b><code>password</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+<input type="password" name="password" data-endpoint="POSTapi-auth-login" data-component="body" required  hidden>
+<br>
+The password of the user.
+</p>
+
 </form>
 
 
@@ -256,10 +277,12 @@ fetch(url, {
 ```
 
 
-> Example response (200):
+> Example response (401):
 
 ```json
-{}
+{
+    "error": "Token not parsed"
+}
 ```
 <div id="execution-results-GETapi-auth-user-profile" hidden>
     <blockquote>Received response<span id="execution-response-status-GETapi-auth-user-profile"></span>:</blockquote>
@@ -283,10 +306,12 @@ fetch(url, {
 </form>
 
 
-## Get the info in dashboard
+## Dashboard
 
+<small class="badge badge-darkred">requires authentication</small>
 
-
+The API endpoint for dashboard
+Route: /admin/dashboard
 
 > Example request:
 
@@ -294,7 +319,8 @@ fetch(url, {
 curl -X GET \
     -G "http://localhost/api/dashboard" \
     -H "Content-Type: application/json" \
-    -H "Accept: application/json"
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer {{token}}"
 ```
 
 ```javascript
@@ -305,6 +331,7 @@ const url = new URL(
 let headers = {
     "Content-Type": "application/json",
     "Accept": "application/json",
+    "Authorization": "Bearer {{token}}",
 };
 
 
@@ -318,8 +345,14 @@ fetch(url, {
 > Example response (401):
 
 ```json
+
+scenario = "invalid token"
+```
+> Example response (401):
+
+```json
 {
-    "error": "Token not parsed"
+    "error": "Invalid token"
 }
 ```
 <div id="execution-results-GETapi-dashboard" hidden>
@@ -330,7 +363,7 @@ fetch(url, {
     <blockquote>Request failed with error:</blockquote>
     <pre><code id="execution-error-message-GETapi-dashboard"></code></pre>
 </div>
-<form id="form-GETapi-dashboard" data-method="GET" data-path="api/dashboard" data-authed="0" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-dashboard', this);">
+<form id="form-GETapi-dashboard" data-method="GET" data-path="api/dashboard" data-authed="1" data-hasfiles="0" data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Authorization":"Bearer {{token}}"}' onsubmit="event.preventDefault(); executeTryOut('GETapi-dashboard', this);">
 <h3>
     Request&nbsp;&nbsp;&nbsp;
         <button type="button" style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;" id="btn-tryout-GETapi-dashboard" onclick="tryItOut('GETapi-dashboard');">Try it out ⚡</button>
@@ -340,6 +373,9 @@ fetch(url, {
 <p>
 <small class="badge badge-green">GET</small>
  <b><code>api/dashboard</code></b>
+</p>
+<p>
+<label id="auth-GETapi-dashboard" hidden>Authorization header: <b><code>Bearer </code></b><input type="text" name="Authorization" data-prefix="Bearer " data-endpoint="GETapi-dashboard" data-component="header"></label>
 </p>
 </form>
 

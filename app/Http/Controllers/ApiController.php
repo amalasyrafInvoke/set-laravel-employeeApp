@@ -21,7 +21,9 @@ class ApiController extends Controller
   }
 
   /**
-   * Get a JWT via given credentials.
+   * Login API
+   * @bodyParam email string required The email of the user. Example: superadmin@invoke.com
+   * @bodyParam password string required The password of the user. Example: password
    *
    * @return \Illuminate\Http\JsonResponse
    */
@@ -93,11 +95,19 @@ class ApiController extends Controller
   }
 
   /**
-   * Get the info in dashboard
-   *
+   * Dashboard
+   * 
+   * The API endpoint for dashboard
+   * Route: /admin/dashboard
+   * 
+   * @authenticated
+   * @header Authorization Bearer {{token}}
+   * @response 401 scenario = "invalid token"
+   * 
    * @return \Illuminate\Http\JsonResponse
    */
-  public function dashboard() {
+  public function dashboard()
+  {
     $userCount = DB::table('users')->count();
     $jobCount = DB::table('jobs')->count();
     $deptCount = DB::table('departments')->count();
@@ -108,5 +118,4 @@ class ApiController extends Controller
     // return response()->json(['userCount' => $userCount,'jobCount' => $jobCount, 'deptCount' => $deptCount, 'message' => 'Successful fetch']);
     return response()->json(compact('data', 'message', 'code'));
   }
-  
 }
