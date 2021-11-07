@@ -54,7 +54,7 @@ class UserPolicy
   public function update(User $user, User $model)
   {
     //
-    return $user->id == $model->id || $user->role == 1
+    return $user->id == $model->id && $user->role == 1
       ? Response::allow()
       : Response::deny('You cannot edit this user');
   }

@@ -10,7 +10,7 @@
     ],
     "info": {
         "name": "Docs",
-        "_postman_id": "80c024d5-c21e-49f3-b1cb-d9a4e79de0d4",
+        "_postman_id": "c68b692b-4441-45ac-8ec8-8157c7e500c5",
         "description": "",
         "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
     },
@@ -19,67 +19,6 @@
             "name": "Endpoints",
             "description": "",
             "item": [
-                {
-                    "name": "api\/user",
-                    "request": {
-                        "url": {
-                            "protocol": "http",
-                            "host": "{{baseUrl}}",
-                            "path": "api\/user",
-                            "query": [],
-                            "raw": "http:\/\/{{baseUrl}}\/api\/user"
-                        },
-                        "method": "GET",
-                        "header": [
-                            {
-                                "key": "Content-Type",
-                                "value": "application\/json"
-                            },
-                            {
-                                "key": "Accept",
-                                "value": "application\/json"
-                            }
-                        ],
-                        "body": null,
-                        "description": "",
-                        "auth": {
-                            "type": "noauth"
-                        }
-                    },
-                    "response": [
-                        {
-                            "name": "api\/user Response #1",
-                            "originalRequest": {
-                                "url": {
-                                    "protocol": "http",
-                                    "host": "{{baseUrl}}",
-                                    "path": "api\/user",
-                                    "query": [],
-                                    "raw": "http:\/\/{{baseUrl}}\/api\/user"
-                                },
-                                "method": "GET",
-                                "header": [
-                                    {
-                                        "key": "Content-Type",
-                                        "value": "application\/json"
-                                    },
-                                    {
-                                        "key": "Accept",
-                                        "value": "application\/json"
-                                    }
-                                ],
-                                "body": null,
-                                "description": "",
-                                "auth": {
-                                    "type": "noauth"
-                                }
-                            },
-                            "header": null,
-                            "cookie": [],
-                            "body": "{\n    \"message\": \"Unauthenticated.\"\n}"
-                        }
-                    ]
-                },
                 {
                     "name": "Login API",
                     "request": {

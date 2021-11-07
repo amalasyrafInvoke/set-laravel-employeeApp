@@ -38,7 +38,7 @@ class ApiController extends Controller
   {
     $validator = Validator::make($request->all(), [
       'email' => 'required|email',
-      'password' => 'required|string|min:6',
+      'password' => 'required|string|min:5',
     ]);
 
     if ($validator->fails()) {
@@ -124,18 +124,17 @@ class ApiController extends Controller
     $jobCount = DB::table('jobs')->count();
     $deptCount = DB::table('departments')->count();
     $message = 'Successfully retrieve the information';
-    $code = 0;
     // When employee has been set-up
     // $employee =  Employee::whereId(1)
     //   ->with(['user', 'jobHistory'])
     //   ->first();
     // $data = compact('userCount', 'jobCount', 'deptCount', 'employee');
-    $data = compact('userCount', 'jobCount', 'deptCount');
+    // $data = compact('userCount', 'jobCount', 'deptCount');
 
     // return response()->json(['userCount' => $userCount,'jobCount' => $jobCount, 'deptCount' => $deptCount, 'message' => 'Successful fetch']);
     // return response()->json(compact('data', 'message', 'code'));
 
-    return $this->jsonResponse(compact('data', 'message', 'code'), '', 200);
+    return $this->jsonResponse(compact('userCount', 'jobCount', 'deptCount'), $message, 200);
   }
 
   /**
